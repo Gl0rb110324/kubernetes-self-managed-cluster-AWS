@@ -1,0 +1,11 @@
+{   //highlights relevant items on the extensions page
+    "recommendations": [
+        "streetsidesoftware.code-spell-checker",
+        "shardulm94.trailing-spaces",
+        "eamodio.gitlens",
+        "hashicorp.terraform",
+        "4ops.terraform",
+        "ms-azuretools.vscode-docker",
+        "AmazonWebServices.aws-toolkit-vscode"
+    ]
+}

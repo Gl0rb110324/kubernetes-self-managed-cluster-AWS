@@ -1,0 +1,20 @@
+{
+    "editor.fontSize": 20,
+    //sort and format imports on vscode alphabetically and by type on the IDE
+    "editor.tabSize": 4,
+    //stops checking of words for the following
+    "cSpell.words" : [
+      "EventBridge"
+    ],
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "[terraform]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.tabSize": 2,
+      },
+      "[terraform-vars]": {
+        "editor.tabSize": 2
+      },
+}
