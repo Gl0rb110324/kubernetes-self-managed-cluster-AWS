@@ -1,6 +1,6 @@
 # kubernetes-self-managed-cluster-AWS
 
-![alt text](./HA-Cluster.jpg)
+![alt text](./misc/HA-Cluster.jpg)
 
 Instantiation of infrastructure requires an AWS provider with the following credentials
 

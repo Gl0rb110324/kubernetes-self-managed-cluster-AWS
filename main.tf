@@ -19,7 +19,13 @@ module "tags" {
 }
 
 module "networking" {
-  source = "./modules/networking"
-  project_name = local.project_name
+  source        = "./modules/networking"
+  project_name  = local.project_name
   required_tags = module.tags.required_tags
+}
+
+module "compute" {
+  source                         = "./modules/compute"
+  HA_cluster_public_subnets_list = module.networking.HA_cluster_public_subnets_ids
+  required_tags                  = module.tags.required_tags
 }
