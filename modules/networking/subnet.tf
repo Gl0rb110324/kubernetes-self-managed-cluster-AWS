@@ -7,7 +7,7 @@ resource "aws_subnet" "kubernetes_cluster_private_subnets" {
   tags = merge(
     var.required_tags,
     {
-      Name = "${var.project_name}-Subnet-Public-${local.subnet_name_notation[count.index]}"
+      Name = "${var.project_name}-Subnet-Private-${local.subnet_name_notation[count.index]}"
     }
   )
 }
@@ -20,7 +20,7 @@ resource "aws_subnet" "kubernetes_cluster_public_subnets" {
   tags = merge(
     var.required_tags,
     {
-      Name = "${var.project_name}-Subnet-Private-${local.subnet_name_notation[count.index]}"
+      Name = "${var.project_name}-Subnet-Public-${local.subnet_name_notation[count.index]}"
     }
   )
 }
