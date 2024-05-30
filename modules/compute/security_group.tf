@@ -1,31 +1,39 @@
-# resource "aws_security_group" "bastion_host_security_group" {
-#   name        = "allow ssh"
-#   description = "Allow TLS inbound traffic and all outbound traffic"
-#   vpc_id      = aws_vpc.main.id
+# Create a security group for the EC2 instance
+resource "aws_security_group" "master_nodes_instances_sg" {
+  name_prefix = "node-instance-sg"
+  vpc_id      = var.HA_cluster_master_nodes_vpc_id
+  description = "security group for the EC2  nodes"
 
-#   tags = {
-#     Name = "allow_tls"
-#   }
-# }
+  # Allow outbound HTTPS traffic
+  egress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow HTTPS outbound traffic"
+  }
 
-# resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
-#   security_group_id = aws_security_group.allow_tls.id
-#   cidr_ipv4         = aws_vpc.main.cidr_block
-#   from_port         = 443
-#   ip_protocol       = "tcp"
-#   to_port           = 443
-# }
+  tags = {
+    Name = "HA-Cluster-Instance-SG"
+  }
+}
 
-# resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv6" {
-#   security_group_id = aws_security_group.allow_tls.id
-#   cidr_ipv6         = aws_vpc.main.ipv6_cidr_block
-#   from_port         = 443
-#   ip_protocol       = "tcp"
-#   to_port           = 443
-# }
+# Security group for VPC Endpoints
+resource "aws_security_group" "vpc_endpoint_security_group" {
+  name_prefix = "vpc-endpoint-sg"
+  vpc_id      = var.HA_cluster_master_nodes_vpc_id
+  description = "security group for VPC Endpoints ingress to HA cluster"
 
-# resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
-#   security_group_id = aws_security_group.allow_tls.id
-#   cidr_ipv4         = "0.0.0.0/0"
-#   ip_protocol       = "-1" # semantically equivalent to all ports
-# }
+  # Allow inbound HTTPS traffic
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [var.HA_cluster_vpc_cidr]
+    description = "Allow HTTPS traffic from VPC"
+  }
+
+  tags = {
+    Name = "VPC Endpoint security group"
+  }
+}

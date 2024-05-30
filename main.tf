@@ -28,4 +28,6 @@ module "compute" {
   source                         = "./modules/compute"
   HA_cluster_public_subnets_list = module.networking.HA_cluster_public_subnets_ids
   required_tags                  = module.tags.required_tags
+  HA_cluster_master_nodes_vpc_id = module.networking.HA_cluster_master_nodes_vpc_id
+  HA_cluster_vpc_cidr            = module.networking.HA_cluster_vpc_cidr
 }
