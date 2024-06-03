@@ -3,4 +3,5 @@
 resource "aws_placement_group" "master_node_placement" {
   name     = "HA_cluster"
   strategy = "spread"
+
 }
